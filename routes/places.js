@@ -17,12 +17,14 @@ router.get('/', (req, res) => {
     return res.status(200).json(places);
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
     const id = parseInt(req.params.id);
     const place = places.find(place => place.id === id);
 
     if (!place) {
-        return res.status(404).json({message: `A post with id ${id} does not exist`});
+        const error = new Error(`Place with id ${id} not found`);
+        error.status = 404;
+        return next(error);
     }
 
     return res.status(200).json(place);
