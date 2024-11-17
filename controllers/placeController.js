@@ -8,7 +8,7 @@ let places = [
 // @route   GET /api/places
 export const getPlaces = (req, res) => {
     const limit = req.query.limit;
-
+    
     if (!isNaN(limit) && limit > 0) {
         return res.status(200).json(places.slice(0, limit))
     }

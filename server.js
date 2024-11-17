@@ -1,5 +1,6 @@
-// We instantiate express.
+// We instantiate express with postgres.
 import express from 'express';
+import pgPromise from "pg-promise";
 const app = express();
 const port = process.env.PORT || 8000;
 
@@ -9,6 +10,10 @@ import places from './routes/places.js';
 // Middleware imports.
 import errorHandler from './middleware/error.js';
 import notFound from './middleware/notFound.js';
+
+// Instantiate pgPromise, then connect to database.
+const pgp = pgPromise();
+const postgres = pgp('postgres://username:password@host:port/database') // Placeholder.
 
 // We start listening on our chosen port.
 app.listen(port, () => {
